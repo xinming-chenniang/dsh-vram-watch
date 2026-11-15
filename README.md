@@ -117,6 +117,13 @@ GPU   : 峰值 100% · 均值 29%
 | PowerShell | Windows PowerShell 5.1 与 pwsh 7 均实测可用 |
 | Node | >= 20 |
 
+## 实测记录（2026-11-15，RTX 2060 SUPER 8 GB / Win11 26220 / DSH 0.2.2-rc.3）
+
+- 长驻采样器装好即跑：19 分钟 580 次采样（= 2 秒一次），缓冲与报告都正常。
+- `Get-Counter` 一次约 **1.0 秒**（与 counter 个数无关，只有 adapter 计数也一样）→ 所以 PDH 走 20 秒一次，GPU 指标才走 2 秒。
+- `nvidia-smi` 一次约 **50 毫秒**；`typeperf` 与 `Get-Counter` 成本同源，没有更便宜的路子。
+- 手工 `pnpm install` 把 `link:` 写进 profile **不会热装载**，必须重启 DSH；重启后 bundle 显示 `availability=profile`、采样器挂在宿主进程下。
+
 ## 卸载
 
 ```powershell

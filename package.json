@@ -1,0 +1,69 @@
+{
+  "name": "@xinming-chenniang/dsh-vram-watch",
+  "version": "0.1.0",
+  "description": "诊断式显存监控：常驻轻采样，OOM 之后告诉你是谁吃掉了显存、是否溢出到系统内存、结束后有没有释放。不是又一个显存仪表盘。 | Diagnostic VRAM watch for DSH: samples GPU memory, gives a four-part verdict after an OOM instead of another gauge.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "assets",
+    "cordis.patch.yml",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xinming-chenniang/dsh-vram-watch.git"
+  },
+  "homepage": "https://github.com/xinming-chenniang/dsh-vram-watch#readme",
+  "bugs": {
+    "url": "https://github.com/xinming-chenniang/dsh-vram-watch/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dsh": {
+    "engines": {
+      "dsh": ">=0.2.2-rc.3"
+    },
+    "compatibility": {
+      "dshReleases": {
+        "0.2.2-rc.3": "compatible"
+      }
+    },
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "cordis",
+    "vram",
+    "gpu",
+    "cuda",
+    "oom",
+    "显存",
+    "诊断"
+  ],
+  "author": "xinming-chenniang",
+  "icon": "./assets/icon.svg",
+  "meta": {
+    "title": "显存诊断",
+    "description": "常驻轻采样显存与 GPU，OOM 之后出四段结论：谁吃掉了、有没有溢出到系统内存、结束后是否释放。"
+  },
+  "scripts": {
+    "test": "node --test",
+    "check": "node --check lib/index.js && node --check lib/sampler.js && node --check lib/report.js && node --check lib/csv.js && node --check lib/buffer.js"
+  }
+}

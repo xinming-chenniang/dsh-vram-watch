@@ -1,0 +1,28 @@
+# @xinming-chenniang/dsh-vram-watch：显存诊断（宿主半部，无客户端界面）。
+#
+# 只有一个 entry：常驻采样器 + vram_watch / vram_report 两个工具。
+# 覆盖默认配置：在 profile 的 cordis.patch.yml 里加同 id 的条目，例如
+#   - id: dsh-vram-watch
+#     name: '@xinming-chenniang/dsh-vram-watch'
+#     config:
+#       autoStart: false
+#       intervalSec: 3
+# 关掉：给 profile 条目加 `disabled: true`（回滚 = 删这一行）。
+#
+# autoStart 默认 true：不先开监控就接不到 OOM 现场，这是本插件与「看板」类插件的
+# 核心差别。不想常驻采样就关掉，需要时让 agent 调 vram_watch start。
+- insert:
+    - id: dsh-vram-watch
+      name: '@xinming-chenniang/dsh-vram-watch'
+      config:
+        autoStart: true
+        # nvidia-smi 采样间隔（秒）；GPU 空闲超过 2 分钟后自动降到 10 秒。
+        intervalSec: 2
+        # 共享显存 / 全进程显存（PDH，单次约 1 秒）的采样间隔（秒）。
+        pdhEverySec: 20
+        # 内存环形缓冲保留的分钟数（不落盘）。
+        bufferMinutes: 60
+        # CSV 输出目录；空 = %TEMP%\dsh-vram-watch
+        csvDir: ''
+        # 指定 powershell 路径；空 = 自动找 Windows PowerShell 5.1，找不到再用 powershell.exe
+        powershell: ''

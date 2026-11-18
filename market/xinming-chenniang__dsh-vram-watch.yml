@@ -1,8 +1,6 @@
 url: https://github.com/xinming-chenniang/dsh-vram-watch
 name: xinming-chenniang/dsh-vram-watch
 category: dev
-# 发 npm 之后取消下面一行的注释（条目与 npm 版本必须对得上；本次是首发，版本 0.1.0）
-# npm: '@xinming-chenniang/dsh-vram-watch'
 icon: https://raw.githubusercontent.com/xinming-chenniang/dsh-vram-watch/main/assets/icon-180.png
 description:
   en: 'Diagnostic VRAM sampler for DSH: samples GPU memory continuously and keeps the last hour in memory. After a CUDA out-of-memory or an unexplained slowdown it reports four things instead of a live gauge — baseline, peak and final dedicated VRAM; each process first → last → peak plus whether it is still running; how much spilled into shared system memory; and how far dedicated VRAM stayed above baseline after the task exited. Two tools: vram_report (analyse the in-memory window or a saved CSV, optionally write the window to disk) and vram_watch (status / start / stop). Windows with an NVIDIA GPU only: reads WDDM performance counters through PowerShell and nvidia-smi; no hooks, no service, no screen capture.'
